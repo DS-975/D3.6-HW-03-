@@ -1,0 +1,99 @@
+python -m venv venv
+# Активируем виртуальное окружение
+.\venv\Scripts\activate
+# Устанавливаем библиотеки из requirements.txt (Django)
+pip install -r requirements.txt
+
+django-admin startproject prj
+cd .\prj\
+python manage.py startapp djangopri
+
+
+prj/prj/settings.py → 12 | import os
+                      40 | 'djangopri',
+                      58 | 'DIRS': [os.path.join(BASE_DIR, 'djangopri/templates/djangopri'),],
+
+prj/djangopri → New → File → templates/djangopri/index.html
+
+prj/prj/urls.py → 22 | path('', include('djangopri.urls')),
+
+prj/djangopri → New → Python File → urls.py
+
+prj/djangopri/urls.py → 1 | from django.contrib import admin
+                        2 | from django.urls import path
+                        3 | from djangopri.views import index
+                        4 |
+                        5 | urlpatterns = [
+                        6 |     path('index', )
+                        7 | ]
+
+prj/djangopri/models.py → 1 | from django.db import models
+                          2 |
+                          3 | class Category(models.Model):
+                          4 |    name = models.CharField(max_length=30, unique=True)
+                          5 |    description = models.TextField() # description - описание
+
+prj/djangopri/views.py → 1 | from django.shortcuts import render
+                         2 |
+                         3 |
+                         4 | def index(reduest):
+                         5 |     return render(reduest, 'index.html')
+
+# Проверяем модели на изменение, с помощью - makemigrations
+python manage.py makemigrations
+
+# Вносим изменения, с помощью - migrate
+python manage.py migrate
+
+prj/djangopri/admin.py → 1 | from django.contrib import admin
+                         2 | from djangopri.models import Category
+                         3 |
+                         4 | admin.site.register(Category)
+
+# Проверяем модели на изменение, с помощью - makemigrations
+python manage.py makemigrations
+
+# Вносим изменения, с помощью - migrate
+python manage.py migrate
+
+# Запускаем сервер, с помощью
+python manage.py runserver
+
+# Создадим superuser, admin | admin
+python manage.py createsuperuser
+
+# Запускаем сервер, с помощью
+python manage.py runserver
+
+# Добавляем чистаемость моделей
+prj/djangopri/models.py → 7 |     # Функция "__str__"
+                          8 |     def __str__(self):
+                          9 |         return self.name
+
+# Запускаем сервер, с помощью
+python manage.py runserver
+
+prj/djangopri/models.py → 11 |    # Переписываем Categorys
+                          12 |    class Meta:
+                          13 |        verbose_name = 'Категория'
+                          14 |        verbose_name_plural = 'Категории'
+
+
+prj/djangopri/models.py → 5 |     description = models.TextField(null=True, blank=True)
+                                                       # description - описание |
+                                                       # null позваляет сохранить значене нан |
+                                                       # blank позволяет не заполнять значение |
+
+# Проверяем модели на изменение, с помощью - makemigrations
+python manage.py makemigrations
+
+# Вносим изменения, с помощью - migrate
+python manage.py migrate
+
+# Запускаем сервер, с помощью
+python manage.py runserver
+
+
+
+
+
