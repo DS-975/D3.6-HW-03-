@@ -81,7 +81,8 @@ prj/djangopri/models.py → 11 |    # Переписываем Categorys
 
 prj/djangopri/models.py → 5 |     description = models.TextField(null=True, blank=True)
                                                        # description - описание |
-                                                       # editable 
+                                                       # editable - это возможно изменение в админ панели 
+                                                       # help_text - выводиться в админке текст добавочного описания
                                                        # null позваляет сохранить значене нан |
                                                        # blank позволяет не заполнять значение |
 
